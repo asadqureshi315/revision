@@ -23,7 +23,7 @@ def reverseLinkedList(head):
     tail=pointer
     pointer=nextNode
   return tail
-
+# FIND IF LL HAS CYCLE
 # we use 2 pointer approach
 # move slow pointer one at a time and fast pointer twice as fast
 # our while condition is that loop till we have a fast and fast's next node
@@ -41,6 +41,45 @@ def hasCycle(self, head: Optional[ListNode]) -> bool:
     if slow==fast:
       return True
   return False
+
+# MERGE 2 SORTED LL
+# basic idea is to have a tail pointer and set tail to the smaller value then move to the next node
+# we are reusing the existing nodes from both linked lists and modifying their .next references to connect them in sorted order.
+# initialize 2 pointers
+# even before iteration we set tail and head to the smaller node 
+# in each iteration we check which is smaller value and then set the tail's next to the smaller value then move the tail to the smaller value's next node
+# after iteration we check if either of the list is remaining for iteration so we just connect tail's next to the remaining pointer
+def merge(list1,list2):
+  if not list1:
+    return list2
+  if not list2:
+    return list1
+  p1=list1
+  p2=list2
+  head=p1
+  tail=p1
+  if p1.val<=p2.val:
+    tail=p1
+    head=p1
+    p1=p1.next
+  else:
+    tail=p2
+    head=p2
+    p2=p2.next
+  while p1 and p2:
+    if p1.val<=p2.val:
+      tail.next=p1
+      tail=p1
+      p1=p1.next
+    else:
+      tail.next=p2
+      tail=p2
+      p2=p2.next
+  if p1:
+    tail.next=p1
+  if p2:
+    tail.next=p2
+  return head
 
 # [2,4,3]+[5,6,4]=[7,0,8]
 # initilize a tail and head to tail
