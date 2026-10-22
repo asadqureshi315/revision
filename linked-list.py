@@ -41,3 +41,37 @@ def hasCycle(self, head: Optional[ListNode]) -> bool:
     if slow==fast:
       return True
   return False
+
+# [2,4,3]+[5,6,4]=[7,0,8]
+# initilize a tail and head to tail
+# we are given 2 linked lists and have to add the number of both linkedlist value
+# our loop will run if l1.val or l2.val or carry exist so even if either of the list ends we continue creating the new list and if both end then the carry will be used
+# for every iteration we create a new node and move tail to the new node.
+# set new node val to the sum of l1 val, l2 val and carry
+# % for base, // for carry
+# move p1 and p2
+# return head.next
+def addTwoNumbers(self, l1, l2):
+  p1=l1
+  p2=l2
+  carry=0
+  tail=ListNode(-1)
+  head=tail
+  while p1 or p2 or carry:
+    newNode=ListNode()
+    p1Val = p1.val if p1 else 0
+    p2Val = p2.val if p2 else 0
+    add=p1Val+p2Val+carry
+    if add>=10:
+      carry=add//10
+      newNode.val=add%10
+    else:
+      newNode.val=add
+      carry=0
+    if p1:
+      p1=p1.next
+    if p2:
+      p2=p2.next
+    tail.next=newNode
+    tail=newNode
+  return head.next
