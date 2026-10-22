@@ -114,3 +114,9 @@ def addTwoNumbers(self, l1, l2):
     tail.next=newNode
     tail=newNode
   return head.next
+
+# using fast slow pointer find the middle of the list
+# reverse the second half
+# merge the 2 half
+def reorderList(head):
+  
