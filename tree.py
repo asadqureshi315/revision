@@ -101,11 +101,31 @@ root.right.left=TreeNode(5)
 
 # here the function asks for a list which is the inorder traversal of the tree, we initialize a list if it is not defined and if it is then we append to the list, in the end we return the list
 def inorderTraversal(root=TreeNode | None,l=None)->list[int]:
-  if root is None:
+  if root is None: # even for an empty list we no root we have to return empty array
     return []
-  if l is None:
+  if l is None: # initialize l if not passed
     l=[]
   inorderTraversal(root.left,l)
   l.append(root.val)
   inorderTraversal(root.right,l)
   return l
+
+def preorderTraversal(self, root: TreeNode | None, l=None) -> list[int]:
+    if l is None:
+        l=[]
+    if root is None:
+        return []
+    l.append(root.val)
+    self.preorderTraversal(root.left,l)
+    self.preorderTraversal(root.right,l)
+    return l
+
+def postorderTraversal(self, root: TreeNode | None, l=None) -> list[int]:
+    if l is None:
+        l=[]
+    if root is None:
+        return []
+    self.postorderTraversal(root.left,l)
+    self.postorderTraversal(root.right,l)
+    l.append(root.val)
+    return l
