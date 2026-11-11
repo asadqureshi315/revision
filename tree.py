@@ -86,3 +86,26 @@
 # - Maximum nodes in height \(h\) (height measured in edges): \(2^{h+1}-1\)
 # - Minimum height for \(n\) nodes: approximately \(\lceil\log_2(n+1)\rceil-1\) edges.
 # - Number of edges in a tree with \(n\) nodes: \(n-1\).
+
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+root=TreeNode(1)
+root.left=TreeNode(2)
+root.left.right=TreeNode(3)
+root.right=TreeNode(4)
+root.right.left=TreeNode(5)
+
+# here the function asks for a list which is the inorder traversal of the tree, we initialize a list if it is not defined and if it is then we append to the list, in the end we return the list
+def inorderTraversal(root=TreeNode | None,l=None)->list[int]:
+  if root is None:
+    return []
+  if l is None:
+    l=[]
+  inorderTraversal(root.left,l)
+  l.append(root.val)
+  inorderTraversal(root.right,l)
+  return l
