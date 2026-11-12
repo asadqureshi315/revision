@@ -129,3 +129,21 @@ def postorderTraversal(self, root: TreeNode | None, l=None) -> list[int]:
     self.postorderTraversal(root.right,l)
     l.append(root.val)
     return l
+
+def stackInorderTraversal(self, root: TreeNode | None) -> list[int]:
+    result = []
+    stack = []
+    pointer = root
+    while pointer or stack:
+        # Go as far left as possible
+        while pointer:
+            stack.append(pointer)
+            pointer = pointer.left
+        # Process the node
+        pointer = stack.pop()
+        result.append(pointer.val)
+        
+        # Move to the right subtree
+        pointer = pointer.right
+
+    return result
