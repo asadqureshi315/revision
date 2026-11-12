@@ -147,3 +147,41 @@ def stackInorderTraversal(self, root: TreeNode | None) -> list[int]:
         pointer = pointer.right
 
     return result
+
+def stackPreorderTraversal(self,root=TreeNode | None)->list[int]:
+    if root is None:
+        return []
+    stack=[root]
+    result=[]
+    while stack:
+        pointer=stack.pop()
+        result.append(pointer.val)
+        # we push right to stack first becuase stack is FIFO i.e. first in first out and preorder traversal is root->left->right so left will get appended after right so therefor gets appended in result first.
+        if pointer.right:
+            stack.append(pointer.right)
+        if pointer.left:
+            stack.append(pointer.left)
+
+    return result
+
+# we use 2 stacks 
+# first one to get the order in root->right->left
+# so when we pop stack2 we get it in preorder i.e. left->right->root
+def postorderTraversal(self, root: TreeNode | None, l=None) -> list[int]:
+    if root is None:
+        return []
+        
+    stack1=[root]
+    stack2=[]
+    result=[]
+    while stack1:
+        pointer=stack1.pop()
+        stack2.append(pointer)
+        if pointer.left:
+            stack1.append(pointer.left)
+        if pointer.right:
+            stack1.append(pointer.right)
+            
+    while stack2:
+        result.append(stack2.pop().val)
+    return result
