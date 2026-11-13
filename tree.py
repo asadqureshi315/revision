@@ -185,3 +185,21 @@ def postorderTraversal(self, root: TreeNode | None, l=None) -> list[int]:
     while stack2:
         result.append(stack2.pop().val)
     return result
+
+# maintain a stack of whichever node we iterate,
+# if node has left or right subtree we swap them then append those subtree to stack as well
+# keep doing it, till there is something in stack
+def invertTree(self, root: TreeNode | None) -> TreeNode | None:
+    if root is None:
+        return None
+    stack = [root]
+    while stack:
+        pointer=stack.pop()
+        temp=pointer.right
+        pointer.right=pointer.left
+        pointer.left=temp
+        if pointer.left:
+            stack.append(pointer.left)
+        if pointer.right:
+            stack.append(pointer.right)
+    return root 
